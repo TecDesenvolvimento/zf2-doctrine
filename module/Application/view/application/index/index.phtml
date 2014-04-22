@@ -1,0 +1,38 @@
+<a href="<?=$this->url('application/default', array(
+    'controller' => 'index', 'action' => 'add'));?>">Adicionar Campus</a>
+
+<?php if(count($this->itens)):?>
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Editar</th>
+            <th>Excluir</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($this->itens as $campus):?>
+            <tr>
+                <td><?=$campus->getId();?></td>
+                <td><?=$campus->getNome();?></td>
+                <td><a href="<?=$this->url('application/default', array(
+                    'controller' => 'index', 'action' => 'edit', 'id' => $campus->getId()));?>">Editar</a></td>
+                <td><a href="<?=$this->url('application/default', array(
+                    'controller' => 'index', 'action' => 'view', 'id' => $campus->getId()));?>">Visualizar</a></td>
+                <td><a href="<?=$this->url('application/default', array(
+                    'controller' => 'index', 'action' => 'del', 'id' => $campus->getId()));?>">Excluir</a></td>
+            </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
+<?php endif;?>
+
+
+<?php if(count($this->itens)):?>
+    <?=$this->paginationControl($this->itens,
+            'Sliding', 'pagination', array(
+            'route' => 'application/pagination', 'params' => array(
+                'controller' => 'index',
+            )));?>
+<?php endif;?>
